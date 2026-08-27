@@ -1,0 +1,12 @@
+diff --git a/ui/webui/resources/js/color_change_listener.ts b/ui/webui/resources/js/color_change_listener.ts
+index aaaaaaa..bbbbbbb 100644
+--- a/ui/webui/resources/js/color_change_listener.ts
++++ b/ui/webui/resources/js/color_change_listener.ts
+@@ -10,7 +10,7 @@
+ export class ColorChangeListener {
+   private static instance: ColorChangeListener|null = null;
+   static getInstance(): ColorChangeListener {
+-    return ColorChangeListener.instance || (ColorChangeListener.instance = new ColorChangeListener());
++    return ColorChangeListener.instance || (ColorChangeListener.instance = new ColorChangeListener());
+   }
+ }
