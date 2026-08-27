@@ -1,0 +1,20 @@
+diff --git a/build/toolchain/linux/BUILD.gn b/build/toolchain/linux/BUILD.gn
+index 1111111..2222222 100644
+--- a/build/toolchain/linux/BUILD.gn
++++ b/build/toolchain/linux/BUILD.gn
+@@ -35,6 +35,16 @@ clang_toolchain("clang_x64") {
+   toolchain_args = {
+     current_cpu = "x64"
+     current_os = "linux"
++    # Host tools use generic x86-64 without target AVX2 flags to prevent generator crashes
++    is_high_end_target = false
++  }
++}
++
++clang_toolchain("clang_x64_target") {
++  toolchain_args = {
++    current_cpu = "x64"
++    current_os = "linux"
++    is_high_end_target = true
+   }
+ }

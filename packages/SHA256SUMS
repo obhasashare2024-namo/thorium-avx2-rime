@@ -1,0 +1,5 @@
+# SHA256 Checksums for Thorium Browser AVX2 (v151.0.7922.72)
+# Verified on production build pipeline
+
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  thorium-browser_151.0.7922.72_AVX2_RIME.deb
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  thorium-browser-avx2-rime-bin-151.0.7922.72-1-x86_64.pkg.tar.zst

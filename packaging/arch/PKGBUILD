@@ -1,0 +1,15 @@
+# Maintainer: namobuddha <obhasashare2024-namo>
+pkgname=thorium-browser-avx2-rime-bin
+pkgver=151.0.7922.72
+pkgrel=1
+pkgdesc="Thorium Browser (AVX2 & RIME IME Optimized Edition) with Hardware Video Decode"
+arch=('x86_64')
+url="https://github.com/obhasashare2024-namo/thorium-avx2-rime"
+license=('BSD-3-Clause')
+depends=('nss' 'libxss' 'gtk3' 'libpulse' 'libva' 'fcitx5')
+provides=('thorium-browser' 'chromium')
+conflicts=('thorium-browser')
+
+package() {
+  tar -xf "${srcdir}/data.tar.xz" -C "${pkgdir}/"
+}
