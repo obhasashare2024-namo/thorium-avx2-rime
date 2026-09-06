@@ -1,6 +1,6 @@
 # Thorium AVX2 (Haswell / Broadwell / Skylake / Zen 1-3) Hardware Support Matrix
 
-This document provides detailed microarchitecture, instruction set, operating system, and GPU hardware acceleration compatibility specifications for **Thorium Browser AVX2 Build (v151.0.7922.72)**.
+This document provides detailed microarchitecture, instruction set, operating system, and GPU hardware acceleration compatibility specifications for **Thorium Browser AVX2 Build (v154.0.8023.0)**.
 
 ---
 
@@ -14,10 +14,10 @@ Thorium AVX2 is compiled with `-march=haswell -mtune=generic -O3` and targets pr
 | **Intel** | **Broadwell (5th Gen)** | Core i7-5775C, Xeon E5-2696 v4 | **Fully Supported** | AVX2, FMA3, BMI1, BMI2, RDSEED |
 | **Intel** | **Skylake / Kaby Lake (6th/7th Gen)**| Core i7-6700K, i7-7700K | **Fully Supported** | AVX2, FMA3, BMI1, BMI2, MPX |
 | **Intel** | **Coffee / Comet Lake (8th~10th Gen)**| Core i9-9900K, i7-10700K | **Fully Supported** | AVX2, FMA3, BMI1, BMI2 |
-| **Intel** | **Alder / Raptor / Arrow Lake** | Core i9-12900K, i7-13700K, Ultra 9 | **Fully Supported** | AVX2, FMA3, BMI1, BMI2, SHA |
+| **Intel** | **Rocket Lake / Alder / Raptor Lake** | Core i9-11900K, i9-12900K, i7-13700K | **Fully Supported** | AVX2, FMA3, BMI1, BMI2, SHA |
 | **AMD** | **Zen 1 / Zen+ (Ryzen 1000/2000)** | Ryzen 7 1800X, Ryzen 5 2600 | **Fully Supported** | AVX2, FMA3, BMI1, BMI2, SHA |
 | **AMD** | **Zen 2 / Zen 3 (Ryzen 3000/5000)** | Ryzen 7 3700X, Ryzen 9 5900X | **Fully Supported** | AVX2, FMA3, BMI1, BMI2 |
-| **AMD** | **Zen 4 / Zen 5 (Ryzen 7000/9000)** | Ryzen 9 7950X, Ryzen 7 9700X | **Fully Supported** | (AVX-512 build also available) |
+| **AMD** | **Zen 4 / Zen 5 (Ryzen 7000/9000)** | Ryzen 9 7950X, Ryzen 7 9700X | **Fully Supported** | AVX2 mode (AVX-512 build also available) |
 
 ---
 
@@ -41,3 +41,4 @@ Thorium AVX2 is compiled with `-march=haswell -mtune=generic -O3` and targets pr
 | **Ubuntu** | 20.04 LTS / 22.04 LTS / 24.04 LTS | **Tier 1 (Full)** | Native `.deb` package |
 | **antiX Linux** | 21 / 22 / 23 (SysVinit / Runit) | **Tier 1 (Full)** | Systemd-free optimized |
 | **Arch Linux** | Rolling Release / Artix / Manjaro | **Tier 1 (Full)** | Native `PKGBUILD` / `.pkg.tar.zst` |
+| **Generic Linux**| Any modern Linux distribution | **Tier 1 (Full)** | Standalone Portable Tarball (`.tar.gz`) |
