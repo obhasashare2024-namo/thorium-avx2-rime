@@ -68,25 +68,28 @@ To eliminate PID collisions, singleton lock contention (`SingletonLock`), and in
 
 ---
 
-## 📦 Release Artifacts & SHA-256 Checksums
+## 📦 Release Artifacts & Verification
 
-| Package | Format | SHA-256 Checksum |
+> [!IMPORTANT]
+> **Exclusive Download Location**: All binary installers, portable archives, emblems, and verification manifests are exclusively hosted under [GitHub Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest). Direct binary download links are intentionally omitted from repository source pages.
+
+| Package / Artifact | Format / Target Platform | SHA-256 Checksum |
 | :--- | :--- | :--- |
-| [`Thorium_macOS_x64_AVX2.dmg`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_macOS_x64_AVX2.dmg) | macOS (Intel AVX2, Ventura/Sonoma/Sequoia) | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
-| [`Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip) | Windows 64-bit AVX2 Portable Archive | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
-| [`thorium-browser_154.0.8023.0_AVX2.deb`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser_154.0.8023.0_AVX2.deb) | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
-| [`thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst) | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
-| [`thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz) | Generic Linux Portable Tarball | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
-| [`thorium-purple-lightning.png`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-purple-lightning.png) | Standard Circle Purple Lightning Emblem | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
-| [`thorium-m154-avx2-suite.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-m154-avx2-suite.zip) | Patches, Build Configs & Scripts Suite | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
-| [`SHA256SUMS.txt`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/SHA256SUMS.txt) | Verification Checksum Manifest | Full Release Checksums |
+| `Thorium_macOS_x64_AVX2.dmg` | macOS (Intel AVX2, Ventura/Sonoma/Sequoia) | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
+| `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip` | Windows 64-bit AVX2 Portable Archive | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
+| `thorium-browser_154.0.8023.0_AVX2.deb` | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
+| `thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst` | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
+| `thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz` | Generic Linux Portable Tarball | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
+| `thorium-purple-lightning.png` | Standard Circle Purple Lightning Emblem | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
+| `thorium-m154-avx2-suite.zip` | Patches, Build Configs & Scripts Suite | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
+| `SHA256SUMS.txt` | Verification Checksum Manifest | Full Release Checksums |
 
 ---
 
 ## 🚀 Quick Start & Installation
 
 ### macOS Installation (`.dmg`):
-1. Download [`Thorium_macOS_x64_AVX2.dmg`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_macOS_x64_AVX2.dmg).
+1. Obtain `Thorium_macOS_x64_AVX2.dmg` from [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest).
 2. Double-click to mount the disk image.
 3. Drag `Thorium.app` into the `Applications` folder shortcut.
 4. If Gatekeeper displays an unverified developer warning, run:
@@ -96,7 +99,7 @@ To eliminate PID collisions, singleton lock contention (`SingletonLock`), and in
 5. Launch `Thorium.app` directly from Launchpad, Finder, or Terminal. User profile data is safely isolated in `~/Library/Application Support/Thorium`.
 
 ### Windows 64-bit Portable:
-1. Download [`Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip).
+1. Obtain `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip` from [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest).
 2. Extract to any folder.
 3. Launch `BIN/thorium.exe`. User profile data is automatically isolated in `USER_DATA/`.
 

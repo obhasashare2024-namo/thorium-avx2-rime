@@ -69,25 +69,28 @@ PID 衝突、単一インスタンスロック競合（`SingletonLock`）、お�
 
 ---
 
-## 📦 リリースファイル一覧と SHA-256 チェックサム
+## 📦 リリース資産および SHA-256 チェックサム
 
-| パッケージ名 | 配布形式 | SHA-256 チェックサム |
+> [!IMPORTANT]
+> **公式ダウンロード場所**：すべてのバイナリインストーラー、ポータブルアーカイブ、公式エンブレム、および検証マニフェストは、**[GitHub Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 内でのみ配布されています**。リポジトリのソースページには直接ダウンロードリンクを配置していません。
+
+| パッケージ | 形式 / 対象プラットフォーム | SHA-256 チェックサム |
 | :--- | :--- | :--- |
-| [`Thorium_macOS_x64_AVX2.dmg`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_macOS_x64_AVX2.dmg) | macOS ディスクイメージ（Intel AVX2、Ventura/Sonoma/Sequoia） | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
-| [`Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip) | Windows 64-bit AVX2 ポータブル版アーカイブ | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
-| [`thorium-browser_154.0.8023.0_AVX2.deb`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser_154.0.8023.0_AVX2.deb) | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
-| [`thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst) | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
-| [`thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz) | 汎用 Linux ポータブル版 | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
-| [`thorium-purple-lightning.png`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-purple-lightning.png) | 公式高精度標準円紫雷エンブレム | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
-| [`thorium-m154-avx2-suite.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-m154-avx2-suite.zip) | パッチ、設定ファイル、ビルドスクリプト一式 | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
-| [`SHA256SUMS.txt`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/SHA256SUMS.txt) | リリース検証用チェックサムファイル | 全ファイルチェックサム |
+| `Thorium_macOS_x64_AVX2.dmg` | macOS ディスクイメージ（Intel AVX2、Ventura/Sonoma/Sequoia） | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
+| `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip` | Windows 64-bit AVX2 ポータブル版アーカイブ | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
+| `thorium-browser_154.0.8023.0_AVX2.deb` | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
+| `thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst` | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
+| `thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz` | 汎用 Linux ポータブル版 | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
+| `thorium-purple-lightning.png` | 公式高精度標準円紫雷エンブレム | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
+| `thorium-m154-avx2-suite.zip` | パッチ、設定ファイル、ビルドスクリプト一式 | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
+| `SHA256SUMS.txt` | リリース検証用チェックサムファイル | 全ファイルチェックサム |
 
 ---
 
 ## 🚀 インストールと起動手順
 
 ### macOS インストール手順（.dmg）：
-1. [`Thorium_macOS_x64_AVX2.dmg`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_macOS_x64_AVX2.dmg) をダウンロードします。
+1. [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) より `Thorium_macOS_x64_AVX2.dmg` を取得します。
 2. ディスクイメージをダブルクリックしてマウントします（カスタム紫雷アイコンが表示されます）。
 3. `Thorium.app` を `Applications` フォルダショートカットへドラッグ＆ドロップします。
 4. Gatekeeper で開発者警告が表示される場合は、ターミナルで以下を実行します：
@@ -97,7 +100,7 @@ PID 衝突、単一インスタンスロック競合（`SingletonLock`）、お�
 5. Launchpad またはターミナルから `Thorium.app` を直接起動します。設定データは `~/Library/Application Support/Thorium` に完全分離されます。
 
 ### Windows 64-bit ポータブル版（Portable）：
-1. [`Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip) をダウンロードします。
+1. [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) より `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip` を取得します。
 2. 任意のフォルダに展開します。
 3. `BIN/thorium.exe` を起動します。プロファイルデータは `USER_DATA/` に自動隔離されます。
 

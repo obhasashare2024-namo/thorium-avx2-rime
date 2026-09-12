@@ -69,25 +69,28 @@
 
 ---
 
-## 📦 發布附件與 SHA-256 校驗表
+## 📦 發布資產清單與校驗清單
+
+> [!IMPORTANT]
+> **專屬下載通道**：所有二進制安裝包、免安裝壓縮檔、官方圖標與完整性校驗清單，均**僅限於 [GitHub Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 列表內下載**。倉庫源碼主頁不提供直接二進制下載連結。
 
 | 套件檔案 | 發行版格式 | SHA-256 完整性雜湊值 |
 | :--- | :--- | :--- |
-| [`Thorium_macOS_x64_AVX2.dmg`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_macOS_x64_AVX2.dmg) | macOS 蘋果磁碟映像（Intel AVX2，Ventura/Sonoma/Sequoia） | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
-| [`Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip) | Windows 64-bit AVX2 免安裝綠色版壓縮包 | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
-| [`thorium-browser_154.0.8023.0_AVX2.deb`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser_154.0.8023.0_AVX2.deb) | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
-| [`thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst) | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
-| [`thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz) | 通用 Linux 免安裝綠色版 | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
-| [`thorium-purple-lightning.png`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-purple-lightning.png) | 官方數學精確標準圓紫雷球徽標 | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
-| [`thorium-m154-avx2-suite.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-m154-avx2-suite.zip) | 補丁包、編譯參數與腳本全集 | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
-| [`SHA256SUMS.txt`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/SHA256SUMS.txt) | 官方校驗清單文件 | 發布全檔案校驗 |
+| `Thorium_macOS_x64_AVX2.dmg` | macOS 蘋果磁碟映像（Intel AVX2，Ventura/Sonoma/Sequoia） | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
+| `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip` | Windows 64-bit AVX2 免安裝綠色版壓縮包 | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
+| `thorium-browser_154.0.8023.0_AVX2.deb` | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
+| `thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst` | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
+| `thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz` | 通用 Linux 免安裝綠色版 | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
+| `thorium-purple-lightning.png` | 官方數學精確標準圓紫雷球徽標 | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
+| `thorium-m154-avx2-suite.zip` | 補丁包、編譯參數與腳本全集 | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
+| `SHA256SUMS.txt` | 官方校驗清單文件 | 發布全檔案校驗 |
 
 ---
 
 ## 🚀 快速安裝與啟動
 
 ### macOS 安裝指南（.dmg）：
-1. 下載 [`Thorium_macOS_x64_AVX2.dmg`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_macOS_x64_AVX2.dmg)。
+1. 請前往 [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 下載 `Thorium_macOS_x64_AVX2.dmg`。
 2. 雙擊掛載磁碟映像檔，自定義磁區圖標即顯紫雷球標。
 3. 將 `Thorium.app` 拖曳至 `Applications` 應用程式目錄捷徑。
 4. 若 macOS Gatekeeper 提示未驗證開發者，請在終端機執行：
@@ -97,7 +100,7 @@
 5. 直接從 Launchpad 或終端機啟動 `Thorium.app`。使用者設定檔安全隔離於 `~/Library/Application Support/Thorium`。
 
 ### Windows 64-bit 免安裝版（Portable）：
-1. 下載 [`Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip)。
+1. 請前往 [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 下載 `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`。
 2. 解壓縮至任意目錄。
 3. 執行 `BIN/thorium.exe`。個人配置自動隔離於 `USER_DATA/`。
 
