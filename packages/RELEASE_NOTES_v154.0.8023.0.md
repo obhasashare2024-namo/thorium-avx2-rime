@@ -1,4 +1,4 @@
-# Thorium Browser v154.0.8023.0 (AVX2 & RIME 金色旗舰版)
+# Thorium Browser v154.0.8023.0 (AVX2 & RIME 旗舰版)
 
 High-performance Chromium build optimized specifically for **Intel Haswell/Broadwell/Skylake/Coffee Lake/Comet Lake/Raptor Lake** and **AMD Zen 1/Zen+/Zen 2/Zen 3** processors supporting **256-bit AVX2, FMA3, and BMI1/BMI2** vector instructions.
 
@@ -17,10 +17,8 @@ Compiled with `-march=haswell -mtune=generic -O3` using LLVM/Clang 23.0.0git, C+
 2. **Native 256-bit AVX2 & FMA3 Vector Acceleration**:
    - Utilizes `YMM0`~`YMM15` vector registers, FMA3 hardware math, and BMI1/BMI2 bit manipulation.
    - **Zero SIGILL risk**: 100% verified on enterprise legacy hardware (Dual Xeon E5-2696 v4).
-3. **Atom Logo Rebase, Gold Icon Asset & Hardcoded Process Decoupling**:
-   - Complete asset replacement with official Thorium atom icons (16x16 to 256x256), eliminating Chromium roundels.
-   - Settings "About" page UI CSS fix (`#productLogo { width: 32px; height: 32px; }`).
-   - Exclusive metallic gold atom icon (`thorium-gold.png`) included.
+3. **Deep-Purple Lightning Logo & Atom Branding Integration**:
+   - Complete icon suite refresh featuring user-approved deep-purple lightning branding across all Linux desktop icon tiers (16x16 through 512x512, PNG & SVG).
    - Kernel process locked to `thorium` via `prctl(PR_SET_NAME, "thorium")`.
    - Dedicated config paths: `~/.config/thorium` and `~/.cache/thorium`.
 4. **Official Google OAuth API Keys & C++ Cookie Persistence Shield**:
@@ -37,9 +35,9 @@ Compiled with `-march=haswell -mtune=generic -O3` using LLVM/Clang 23.0.0git, C+
 ### 📦 Checksums (SHA-256)
 
 ```text
-f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8  thorium-browser_154.0.8023.0_AVX2.deb
-612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682  thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst
-dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0  thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz
-0ca24a89340bcbace48f6b4f4ee1f71b36777d3bd2edd06a6b6591547027d321  thorium-gold.png
+a91088ff05de110006ef64994d4281f5d38932b3a035d474539aae3c0915c52c  thorium-browser_154.0.8023.0_AVX2.deb
+697e246a9981cf477f1eddcc7683213862c33cabd0ec79896326ac5f4f7cd253  thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst
+12e63ffefb04681a0db59a1266d7f25c9c2fbc6498204bae5ecf7d3fc5498d84  thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz
 348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54  thorium-m154-avx2-suite.zip
+1f248d1baacb26d0ba769d90116bd7784b8c3ac8e5f823fb25634f3778968d53  thorium-purple-lightning.png
 ```

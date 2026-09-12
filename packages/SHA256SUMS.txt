@@ -1,3 +1,5 @@
 a91088ff05de110006ef64994d4281f5d38932b3a035d474539aae3c0915c52c  thorium-browser_154.0.8023.0_AVX2.deb
 697e246a9981cf477f1eddcc7683213862c33cabd0ec79896326ac5f4f7cd253  thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst
 12e63ffefb04681a0db59a1266d7f25c9c2fbc6498204bae5ecf7d3fc5498d84  thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz
+348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54  thorium-m154-avx2-suite.zip
+1f248d1baacb26d0ba769d90116bd7784b8c3ac8e5f823fb25634f3778968d53  thorium-purple-lightning.png

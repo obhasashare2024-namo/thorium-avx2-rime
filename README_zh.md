@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/thorium-purple-lightning.png" width="220" alt="Thorium Browser Emblem">
+</p>
+
 # Thorium 瀏覽器 154（Chromium 154.0.8023.0 + Thorium 152 混血 AVX2 旗艦版）- 深度整合 RIME 輸入法與硬體解碼
 
 [![發布版本](https://img.shields.io/badge/發布版本-v154.0.8023.0-blue.svg)](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/tag/v154.0.8023.0)
@@ -72,7 +76,6 @@
 | [`thorium-browser_154.0.8023.0_AVX2.deb`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser_154.0.8023.0_AVX2.deb) | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
 | [`thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst) | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
 | [`thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz) | 通用 Linux 免安裝綠色版 | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
-| [`thorium-gold.png`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-gold.png) | 官方金屬金原子圖標資產 | `0ca24a89340bcbace48f6b4f4ee1f71b36777d3bd2edd06a6b6591547027d321` |
 | [`thorium-m154-avx2-suite.zip`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/thorium-m154-avx2-suite.zip) | 補丁包、編譯參數與腳本全集 | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
 | [`SHA256SUMS.txt`](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/download/v154.0.8023.0/SHA256SUMS.txt) | 官方校驗清單文件 | 發布全檔案校驗 |
 
