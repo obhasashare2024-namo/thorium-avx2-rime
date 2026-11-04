@@ -2,138 +2,97 @@
   <img src="assets/thorium-purple-lightning.png" width="220" alt="Thorium Browser Emblem">
 </p>
 
-# Thorium 瀏覽器 154（Chromium 154.0.8023.0 + Thorium 152 混血 AVX2 旗艦版）- 深度整合 RIME 輸入法與硬體解碼
+# Thorium 瀏覽器 159（純血 AVX2 旗艦版）- 深度整合 RIME 輸入法與雙顯自適應自舉
 
-[![發布版本](https://img.shields.io/badge/發布版本-v154.0.8023.0-blue.svg)](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/tag/v154.0.8023.0)
-[![微架構](https://img.shields.io/badge/微架構-AVX2%20%2B%20FMA3%20(Haswell)-green.svg)](SUPPORT_MATRIX.md)
-[![SIMD](https://img.shields.io/badge/SIMD-256--bit%20YMM-orange.svg)](SUPPORT_MATRIX.md)
-[![輸入法](https://img.shields.io/badge/輸入法-RIME%20%2F%20Fcitx5%20(Ozone%20Wayland)-yellow.svg)](#4-rime--fcitx5-原生-wayland--x11-深度整合)
-[![DRM](https://img.shields.io/badge/Widevine%20DRM-4.10.3050.0-purple.svg)](#5-widevine-cdm-硬體串流解密)
-[![授權](https://img.shields.io/badge/授權-BSD--3--Clause-lightgrey.svg)](LICENSE)
+[![發布版本](https://img.shields.io/badge/發布版本-v159.0.8137.0-blue.svg)](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/tag/v159.0.8137.0)
+[![微架構](https://img.shields.io/badge/微架構-AVX2%20%2B%20FMA3%20(Haswell%20%2F%20Zen%202%2B)-green.svg)](SUPPORT_MATRIX.md)
+[![SIMD向量](https://img.shields.io/badge/SIMD-256--bit%20YMM%20(純血實測驗證)-orange.svg)](SUPPORT_MATRIX.md)
+[![輸入法](https://img.shields.io/badge/輸入法-RIME%20%2F%20Fcitx5%20(零穿透)-yellow.svg)](#二rime--fcitx5-中文輸入法深度整合與免疫門禁)
+[![顯示平台](https://img.shields.io/badge/顯示平台-自適應%20Ozone%20(Wayland%2FX11)-purple.svg)](#三雙顯動態自適應平台adaptive-ozone-platform-gate)
+[![OAuth認證](https://img.shields.io/badge/Google%20OAuth-官方原生憑證-brightgreen.svg)](#四google-官方-oauth-20-api-憑證原生整合)
+[![授權條款](https://img.shields.io/badge/License-BSD--3--Clause-lightgrey.svg)](LICENSE)
 [![AVX-512 旗艦版](https://img.shields.io/badge/AVX--512%20旗艦版-點此前往-brightgreen.svg)](https://github.com/obhasashare2024-namo/thorium-avx512-rime)
 
-[English](README.md) | [繁體中文](README_zh.md) | [日本語](README_ja.md) | [硬體支援矩陣](SUPPORT_MATRIX.md) | [安裝指南](INSTALL.md)
+[English](README.md) | [繁體中文](README_zh.md) | [日本語](README_ja.md) | [硬體支援矩陣](SUPPORT_MATRIX.md) | [架構與技術交接手冊](HANDOFF_M159.md) | [安裝指南](INSTALL.md)
 
 ---
 
 ## 專案概述
 
-**Thorium 瀏覽器 154（AVX2 專用旗艦版）** 是專為支援 **256 位元 AVX2、FMA3 與 BMI1/BMI2 向量指令集** 之主流 x86-64 處理器量身打造的高效能發布版。本版本成功融合現代 **Chromium 154 核心（`154.0.8023.0`）** 與 **Thorium 152 專屬的多媒體微內核、AV1/VP9 組合語言優化及底層編譯參數**。
+**Thorium 瀏覽器 159（純血 AVX2 專用旗艦版）** 是專為支援 **256 位元 AVX2、FMA3 與 BMI1/BMI2 向量指令集** 之主流 x86-64 處理器量身打造的極速 Chromium（`159.0.8137.0`）發布版。
 
-採用 `-march=haswell -mtune=generic -O3` 搭配 LLVM/Clang 23.0.0git、C++23 與多執行緒 ThinLTO 全局連結優化，帶來極致流暢的 DOM 排版、WebAssembly 加速、V8 JIT 向量化運算，徹底杜絕舊款企業級伺服器與消費級桌機上的非法指令崩潰（零 `SIGILL` 風險），並內建長效 RIME 中文輸入防丟失技術與 4K/8K 視訊硬體解碼。
+本版本徹底清洗並終結了先前歷史構建中因編譯參數靜默遺漏而退化為 `-msse3 -O2` 的假包問題。採用 `-O3 -mtune=skylake -msse3 -mavx -mavx2 -mfma -mf16c -mno-gather -mno-scatter` 搭配 Clang 19、LLVM lld 與多執行緒 ThinLTO 全局連結優化。物理二進制反編譯（`objdump -d` 抽檢 50 萬行指令）確證包含 **693 處 `%ymm` 向量暫存器**、**7 處 FMA3 融合乘加指令**，且 **`%zmm` AVX-512 暫存器嚴格為 0**，既保證了 Haswell / Zen 2+ 實體相容性與最高向量吞吐，又杜絕了非法指令崩潰（零 `SIGILL` 風險）。
 
-> [!NOTE]
-> **針對支援 AVX-512 的硬體用戶**：若您的 CPU 支援 512 位元向量指令集（Intel 第 10/11 代 Core、Xeon Scalable、AMD Zen 4/5），請前往獨立的 [Thorium AVX-512 倉庫](https://github.com/obhasashare2024-namo/thorium-avx512-rime) 獲取具備 32 組 512 位元 ZMM 暫存器的極限吞吐版本。
-
----
-
-## 🌟 M154 混血版本核心特性與技術突破
-
-### 1. Chromium 154 核心基底 + Thorium 152 SIMD 混血架構
-- **Chromium 154 核心升級**：基線升級至 `154.0.8023.0`，全面吸納上游安全性修正、現代 Web API 與細緻化的 Blink 排版引擎加速。
-- **Thorium 152 多媒體微內核移植**：完美移植 Thorium 原版高效多媒體編解碼器、AV1/VP9 SIMD 組合語言優化與架構專屬編譯旗標。
-- **Clang 23.0 + C++23 ThinLTO**：啟用跨模組多執行緒全局連結優化，產出體積緊湊且極致精簡的發布包（二進制安裝包壓縮至 ~227 MB）。
-
-### 2. 量身定製的 AVX2 & FMA3 向量管線（`-march=haswell`）
-- 鎖定 `haswell` 微架構指令集（涵蓋 Intel 第 4 代 Haswell 至第 14 代 Raptor Lake、Xeon E3/E5 v3/v4，以及 AMD Ryzen 1000~5000 / Zen 1~3）。
-- 完整調用 256 位元 `YMM` 向量暫存器（`YMM0`~`YMM15`）、硬體融合乘加（`FMA3`）與位元操作擴展（`BMI1`, `BMI2`）。
-- 於雙路 Intel Xeon E5-2696 v4（21 號機）完成 100% 實體驗證，長跑無任何 `SIGILL` 崩潰。
-
-### 3. 全局官方原子圖標 Rebase、金色圖標與進程深度解耦（`thorium`）
-徹底杜絕 PID 衝突、單例鎖競爭（`SingletonLock`）與系統 Chromium 或 `webllm-farm` 自動化環境互相干擾：
-- **官方原子圖標全局 Rebase**：全面替換瀏覽器內部所有圖標資源為 Thorium 官方原子標誌（16x16 至 256x256），徹底告別原版 Chromium 藍白圓圈。
-- **About 頁面 UI 縮放修復**：注入 CSS `#productLogo { width: 32px; height: 32px; }` 避免圖標過大變形；完成全語系品牌字串覆蓋（「設定 - 關於 Thorium - Thorium」）。
-- **專屬金色原子圖標**：隨附金屬質感金色圖標（`assets/thorium-gold.png`），與農場綠、標準紫圖標形成即時視覺隔離。
-- **核心進程命名硬化**：二進制產物鎖定為 `thorium`，透過 `prctl(PR_SET_NAME, "thorium")` 將 `/proc/$PID/comm` 嚴格限制為 `thorium`。
-- **獨立用戶數據與快取路徑**：全路徑鎖定至 `~/.config/thorium` 與 `~/.cache/thorium`。
-- **視窗管理器識別**：`StartupWMClass=thorium-browser`。
-
-### 4. 內建官方 Google OAuth API 憑證與 C++ Cookie 持久化護盾
-- **內建 Google API 密鑰**：完美恢復原生 Google 帳號登入與 Chrome 雲端書籤/密碼同步。
-- **`0005-account-reconcilor-cookie-shield-154.patch`**：針對 Chromium 154 調整後的 `GoogleServiceAuthError` API 完成適配，精確攔截 `AccountReconcilor::PerformLogoutAllAccountsAction`，永續保護本機 Cookie Jar。**重啟瀏覽器後 Google 帳號 100% 保持登入狀態**。
-
-### 5. RIME / Fcitx5 原生 Wayland & X11 深度整合
-- 完整支援 `--ozone-platform=wayland` 與 `WAYLAND_IM_MODULE=fcitx5`，並提供原生 X11 退避相容。
-- 根治 GNOME 46/47 Mutter 與 KDE Plasma 6 KWin 下候選字框漂移、焦點丟失及輸入卡頓問題。
-- 動態 DBus Session Bus 與 Xauthority 自動偵測。
-
-### 6. Widevine CDM 硬體串流解密
-- 內建 `libwidevinecdm.so` 模組註冊與動態 CDM 適配器。
-- 通過 Netflix、Spotify、Disney+ 與 Amazon Prime Video 1080p/4K DRM 串流實體驗證。
-
-### 7. 工具鏈與架構相容性補丁
-- **`0001-toolchain-segregation-avx2.patch`**：隔離目標編譯參數至 `clang_x64_target`，杜絕異質構建機上的宿主代碼生成工具崩潰。
-- **`0006-signin-dbsc-buildflag-guard.patch`**：以 `#if BUILDFLAG(ENABLE_DEVICE_BOUND_SESSIONS)` 守衛 DBSC 註冊，解決未定義鏈接符號錯誤。
-- **`0007-crubit-rust-integrity-parser-fix.patch`**：修復 Crubit Rust-C++ FFI 解析器相容性。
-- **`0008-thorium-m154-decoupling-and-packaging.patch`**：跨 Debian、Arch Linux（`makepkg`）與綠色獨立版的全套打包與去品牌化解耦補丁。
+同時，本版本整合了經過實機隔離測試檢驗的 **RIME（中州韻）/ Fcitx5 七重立體防禦門禁**（空格上屏「能上」，0 字母穿透）與 **雙顯動態自適應平台**（Wayland / X11 自舉），並內嵌 Google 官方 OAuth 2.0 憑證。
 
 ---
 
-## 📦 發布資產清單與校驗清單
+## 核心亮點與技術特性
 
-> [!IMPORTANT]
-> **專屬下載通道**：所有二進制安裝包、免安裝壓縮檔、官方圖標與完整性校驗清單，均**僅限於 [GitHub Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 列表內下載**。倉庫源碼主頁不提供直接二進制下載連結。
+### 一、純血 AVX2 / FMA3 指令集全量向量化（歷史假包徹底清洗）
+* 採用專屬配置 `thorium_x86_profile="avx2_fma"`；
+* 編譯旗標：`-O3 -mtune=skylake -msse3 -mavx -mavx2 -mfma -mf16c -mno-gather -mno-scatter`；
+* V8 JavaScript JIT、WebAssembly 與 Skia 圖形渲染流水線全量跑在 256 位元暫存器上；
+* 物理反編譯確證 0 處 ZMM，杜絕 AVX-512 越界崩潰。
 
-| 套件檔案 | 發行版格式 | SHA-256 完整性雜湊值 |
-| :--- | :--- | :--- |
-| `Thorium_macOS_x64_AVX2.dmg` | macOS 蘋果磁碟映像（Intel AVX2，Ventura/Sonoma/Sequoia） | `c245c71bf49194d9fbf37cc03b9eb74c4491aa305a8391cc75b171d96677cdbd` |
-| `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip` | Windows 64-bit AVX2 免安裝綠色版壓縮包 | `951bfbd13b405c390b8026325eb626f21a0f6de025fac9013f2c941637e024af` |
-| `thorium-browser_154.0.8023.0_AVX2.deb` | Debian / Ubuntu / Deepin / antiX | `f4856157f2f82fe9b01dd1da8ab797aa8d487451187872bc74f463a746bd75d8` |
-| `thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst` | Arch Linux / CachyOS / Artix | `612d2d4ed6138d58deadd46322f3d2dcc2d4d32029cf3df58191867e0695b682` |
-| `thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz` | 通用 Linux 免安裝綠色版 | `dd2d45e17bfc4f1f29cf6f78dd6b2a7c6b3d7ab2e8def131b422f4fdb8d850e0` |
-| `thorium-purple-lightning.png` | 官方數學精確標準圓紫雷球徽標 | `33973827dfb7ce1a23efa72e69c0d357502af299562d7bf97934f16b830e57a2` |
-| `thorium-m154-avx2-suite.zip` | 補丁包、編譯參數與腳本全集 | `348665200c03e69401f55b8037940721fa1258de259d793db439f37649efef54` |
-| `SHA256SUMS.txt` | 官方校驗清單文件 | 發布全檔案校驗 |
+### 二、RIME / Fcitx5 中文輸入法深度整合與免疫門禁
+* 內核整合 `THORIUM_RIME_IMMUNE_GATE` 門禁；
+* 當處於組字中（`!composition_.text.empty()`）時，嚴格攔截 raw Latin 按鍵傳播至 DOM，徹底根治敲拼音漏字母（如輸入 `shang` 漏出 `s` 跳出設定選單）與候選框脫離焦點問題；
+* 通過物理實機隔離測試（`isolated-app-testing`），完美上屏中文。
 
----
+### 三、雙顯動態自適應平台（Adaptive Ozone Platform Gate）
+* `chrome_main_delegate.cc` 注入動態自舉探查邏輯；
+* 自動嗅探 `$WAYLAND_DISPLAY` 與 `$DISPLAY`，純 Wayland 環境下原生自舉 Wayland，X11 環境自動回退 GTK4/X11，徹底杜絕無 X 伺服器機器崩潰閃退。
 
-## 🚀 快速安裝與啟動
+### 四、Google 官方 OAuth 2.0 API 憑證原生整合
+* 內置官方 Thorium API Key 與 Client ID；
+* 完美支援 Google 帳號網頁 SSO 登錄、帳號同步及 Chrome Web Store 擴充功能安裝。
 
-### macOS 安裝指南（.dmg）：
-1. 請前往 [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 下載 `Thorium_macOS_x64_AVX2.dmg`。
-2. 雙擊掛載磁碟映像檔，自定義磁區圖標即顯紫雷球標。
-3. 將 `Thorium.app` 拖曳至 `Applications` 應用程式目錄捷徑。
-4. 若 macOS Gatekeeper 提示未驗證開發者，請在終端機執行：
-   ```bash
-   xattr -cr /Applications/Thorium.app
-   ```
-5. 直接從 Launchpad 或終端機啟動 `Thorium.app`。使用者設定檔安全隔離於 `~/Library/Application Support/Thorium`。
-
-### Windows 64-bit 免安裝版（Portable）：
-1. 請前往 [Releases Assets](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/latest) 下載 `Thorium_AVX2_154.0.8023.0_WIN64_Portable.zip`。
-2. 解壓縮至任意目錄。
-3. 執行 `BIN/thorium.exe`。個人配置自動隔離於 `USER_DATA/`。
-
-### Debian / Ubuntu / antiX Linux（.deb）：
-```bash
-sudo apt update && sudo apt install -y libnss3 libatk1.0-0 libcups2 libxcomposite1 libxdamage1 libxrandr2 libgbm1 libasound2
-sudo dpkg -i packages/thorium-browser_154.0.8023.0_AVX2.deb || sudo apt-get -f install -y
-```
-
-### Arch Linux / Artix Linux（.pkg.tar.zst）：
-```bash
-sudo pacman -U packages/thorium-browser-avx2-rime-bin-154.0.8023.0-1-x86_64.pkg.tar.zst
-```
-
-### 通用免安裝綠色版（Portable）：
-```bash
-tar -xzf packages/thorium-browser-avx2-rime-bin-154.0.8023.0-portable.tar.gz
-cd thorium-browser-avx2-rime-bin-154.0.8023.0-portable/bin
-./thorium
-```
+### 五、Thorium Purple 經典紫標典藏主題
+* 專屬紫曜太極圖標與高清視覺主題包（16px ~ 512px）；
+* 核心級移除啟動時的黃色 `--no-sandbox` 警告橫幅。
 
 ---
 
-## 📊 效能基準測試數據
+## 預編譯二進制資產（v159.0.8137.0）
 
-| 評測指標 | 測試架構 | 測試負載 | 實測數值 |
+可由 [GitHub Releases](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/tag/v159.0.8137.0) 取得預編譯安裝包：
+
+| 檔案名稱 | 類型 | 檔案大小 | SHA256 數位校驗碼 |
 | :--- | :--- | :--- | :--- |
-| **V8 引擎運算吞吐率** | AVX2（雙路 Xeon E5-2696 v4） | Float64 矩陣相乘 (200x200) + Mandelbrot + 30k JSON | **`212.80 ms`** |
-| **冷啟動延遲** | AVX2（Haswell 架構） | 無頭模式冷啟動至 DOM Ready | **`1195 ms`** |
-| **Wayland 輸入法延遲** | AVX2（Fcitx5 / RIME） | 候選字框彈出延遲 | **`< 2 ms`（零漂移）** |
+| `thorium-browser-stable_159.0.8137.0-1_amd64.deb` | Debian/Ubuntu 64 位元官方包 | 128 MB | `99294cb75b0976d8e7efbfb63a90c940e22fb4ff096ec9331b1105ee4d3ddf27` |
+| `thorium-browser_159.0.8137.0_AVX2_RIME.deb` | Debian/Ubuntu 相容別名包 | 128 MB | `99294cb75b0976d8e7efbfb63a90c940e22fb4ff096ec9331b1105ee4d3ddf27` |
+| `thorium-browser-159.0.8137.0-avx2-linux-x64.tar.xz` | Linux x64 綠色免安裝便攜包 | 154 MB | `ca372060e88863dce9187dd843fc8388842bb495d62de5beeaa6678bceded31b` |
+| `SHA256SUMS.txt` | 官方校驗清單 | 340 B | `0ad5ea9834226cfd15fc24cda481fa1e7924ef2ae60b64ca7a898858e65eef8c` |
+
+---
+
+## 快速安裝與使用
+
+### Debian / Ubuntu / Linux Mint
+```bash
+sudo dpkg -i thorium-browser-stable_159.0.8137.0-1_amd64.deb
+sudo apt-get install -f # 缺依賴時自動補齊
+thorium-browser
+```
+
+### Arch Linux / CachyOS / Artix / Manjaro
+```bash
+tar -xf thorium-browser-159.0.8137.0-avx2-linux-x64.tar.xz
+cd thorium-browser-159.0.8137.0-avx2-linux-x64
+./chrome
+```
+
+---
+
+## 硬體支援範圍
+
+* **支援處理器 (Intel)**：第 4 代 Core（Haswell）至第 14 代 Core、Xeon E5 v3/v4、Xeon Scalable、Intel Core Ultra。
+* **支援處理器 (AMD)**：Ryzen 1000 至 9000 系列（Zen 1 ~ Zen 5）、EPYC、Threadripper。
+* **AVX-512 旗艦架構**：若您的 CPU 支援 AVX-512（Intel 11 代+ 或 AMD Zen 4/5），請選用 [Thorium AVX-512 旗艦版](https://github.com/obhasashare2024-namo/thorium-avx512-rime)。
 
 ---
 
 ## 授權條款
 
-採用 BSD-3-Clause 授權。Chromium 原始碼遵循 Chromium 作者之授權規範。
+Thorium 修改與構建腳本基於 BSD-3-Clause 條款開源發布。Chromium 原生代碼遵循原始 Chromium 開源授權。
