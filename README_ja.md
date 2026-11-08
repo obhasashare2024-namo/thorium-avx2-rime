@@ -2,26 +2,55 @@
   <img src="assets/thorium-purple-lightning.png" width="220" alt="Thorium Browser Emblem">
 </p>
 
-# Thorium Browser 159（純血 AVX2 旗艦版）- RIME IME統合＆自適応Ozoneプラットフォーム
+# Thorium Browser 159（Haswell/Zen+ AVX2＆RIME IME対応版）
 
 [![リリース](https://img.shields.io/badge/リリース-v159.0.8137.0-blue.svg)](https://github.com/obhasashare2024-namo/thorium-avx2-rime/releases/tag/v159.0.8137.0)
-[![アーキテクチャ](https://img.shields.io/badge/アーキテクチャ-AVX2%20%2B%20FMA3%20(Haswell%20%2F%20Zen%202%2B)-green.svg)](SUPPORT_MATRIX.md)
-[![SIMD](https://img.shields.io/badge/SIMD-256--bit%20YMM%20(純血実測検証済み)-orange.svg)](SUPPORT_MATRIX.md)
+[![ハイブリッドビルド](https://img.shields.io/badge/ハイブリッドビルド-公式%20Chromium%20159%20%2B%20Thorium%2015x-blueviolet.svg)](#-ハイブリッドコンパイルアーキテクチャと系譜-hybrid-compilation-architecture)
+[![アーキテクチャ](https://img.shields.io/badge/Microarchitecture-AVX2%20%2B%20FMA3%20(Haswell%20%2F%20Zen%202%2B)-green.svg)](SUPPORT_MATRIX.md)
+[![SIMD](https://img.shields.io/badge/SIMD-256--bit%20YMM%20(検証済み)-orange.svg)](SUPPORT_MATRIX.md)
 [![IME](https://img.shields.io/badge/IME-RIME%20%2F%20Fcitx5%20(ゼロリーク)-yellow.svg)](#2-rime--fcitx5-統合と免疫ゲート)
 [![ディスプレイ](https://img.shields.io/badge/Display-Adaptive%20Ozone%20(Wayland%2FX11)-purple.svg)](#3-adaptive-ozone-プラットフォームゲート)
 [![OAuth](https://img.shields.io/badge/Google%20OAuth-ネイティブ認証-brightgreen.svg)](#4-公式-google-oauth-20-クレデンシャル統合)
 [![ライセンス](https://img.shields.io/badge/License-BSD--3--Clause-lightgrey.svg)](LICENSE)
 [![AVX-512 版](https://img.shields.io/badge/AVX--512%20版-こちらへ-brightgreen.svg)](https://github.com/obhasashare2024-namo/thorium-avx512-rime)
 
-[English](README.md) | [繁體中文](README_zh.md) | [日本語](README_ja.md) | [ハードウェア互換性表](SUPPORT_MATRIX.md) | [技術引き継ぎ書](HANDOFF_M159.md) | [インストールガイド](INSTALL.md)
+[English](README.md) | [繁體中文](README_zh.md) | [日本語](README_ja.md) | [Hardware Support Matrix](SUPPORT_MATRIX.md) | [技術引き継ぎ書](HANDOFF_M159.md) | [インストール ガイド](INSTALL.md)
+
+---
+
+## 🧬 ハイブリッドコンパイルアーキテクチャと系譜 (Hybrid Compilation Architecture)
+
+> [!IMPORTANT]
+> **ハイブリッドソースコードの系譜**：本プロジェクトは、**公式 Chromium 159**（`159.0.8137.0` 最新上流ツリー）と **Thorium 最新 15x**（`Alex313031/Thorium` の SIMD 最適化および機能パッチ群）を融合し、さらに独自開発の Linux RIME / Fcitx5 7層免疫ゲートおよび Adaptive Ozone プラットフォームを統合した**デュアルトラック ハイブリッドビルド版**です。
+
+```mermaid
+graph TD
+    A["公式 Chromium 上流ツリー (v159.0.8137.0)"] --> D["ハイブリッド ソースツリー (M159 AVX2)"]
+    B["Thorium 最新 15x パッチ群 (AVX2+FMA3 SIMD / ThinLTO / Codecs / 紫テーマ)"] --> D
+    C["独自 C++ 強化パッチ (RIME 免疫ゲート / 自律 Ozone / ログイン保持)"] --> D
+    D --> E["GN ベクトル構成 (args_avx2.gn)"]
+    E --> F["Clang 19 + ThinLTO + 256ビット YMM コンパイルエンジン"]
+    F --> G["ネイティブ バイナリおよびパッケージ (.deb / .tar.xz)"]
+```
+
+| 構成要素 | ソース / 上流 | 主な貢献と技術的実装詳細 |
+| :--- | :--- | :--- |
+| **ベース ブラウザ エンジン** | **公式 Chromium 159** (`159.0.8137.0`) | 最新の Chromium セキュリティ修正、V8 JavaScript JIT エンジン、WebAssembly 拡張、最新の Web 標準を完全享受。 |
+| **ベクトル & マルチメディア群** | **Thorium 最新 15x** (`Alex313031/Thorium`) | AVX2 & FMA3 最適化フラグ、ThinLTO、全メディアコーデック（HEVC/Dolby Vision/AC3/VA-API）、公式 API キー、紫太極ブランドアセット。 |
+| **RIME / Fcitx5 免疫ゲート** | **独自パッチ Patch 0003** | `input_method_auralinux.cc` に 7 層の変換中文字遮断（`!composition_.text.empty()`）を注入し、未変換英字漏れを完全に排除。 |
+| **プロファイル隔離** | **独自パッチ Patch 0004** | プロファイルパスを `~/.config/thorium` にハードコードし、システム既定の Chromium との競合を完全に回避。 |
+| **セッション維持・抗ログアウト** | **独自パッチ Patch 0005** | DICE & DBSC トークンバインドを無効化し、Gaia Cookie Jar のリセットを遮断。再起動時の Google / YouTube 自動ログアウトを根本解決。 |
+| **OSCrypt Basic プロバイダ** | **独自パッチ Patch 0006** | `peanuts`（v10 キー）をデフォルトプロバイダとして設定し、D-Bus Secret Service / KWallet へのハード依存を排除。 |
+| **SQLite WAL チェックポイント** | **独自パッチ Patch 0007** | SIGTERM 受信時に `PRAGMA wal_checkpoint(TRUNCATE)` を強制実行し、セッションデータの破損を防止。 |
+| **自律 Ozone プラットフォーム** | **独自 Delegate ロジック** | 起動時に Wayland と X11 を動的検出。Wayland を優先しつつ X11 へ自動フォールバック。純粋な Wayland 環境でのクラッシュを防止。 |
 
 ---
 
 ## 概要
 
-**Thorium Browser 159（純血 AVX2 專用旗艦版）** は、**256 ビット AVX2、FMA3、および BMI1/BMI2 拡張命令セット** をサポートする主流の x86-64 プロセッサ向けに最適化された高性能 Chromium（`159.0.8137.0`）ビルドです。
+**Thorium Browser 159（純血 AVX2 対応版）** は、**256 ビット AVX2、FMA3、および BMI1/BMI2 ベクトル命令セット** をサポートする主流の x86-64 プロセッサ向けにビルドされた超高速 Chromium（`159.0.8137.0`）フォークです。
 
-以前のビルドで発生していたコンパイラフラグの脱落（`-msse3 -O2` へのサイレントダウングレード）を完全に解消。`-O3 -mtune=skylake -msse3 -mavx -mavx2 -mfma -mf16c -mno-gather -mno-scatter`、Clang 19、および ThinLTO を適用し、逆アセンブル（`objdump -d` 50万命令サンプリング）により **693 箇所の `%ymm` ベクトル命令**、**7 箇所の FMA3 命令**、および **`%zmm` 0 箇所** を物理確認済みです。Haswell / Zen 2+ 環境において最高峰のベクトルスループットを発揮しながら、命令例外（`SIGILL`）リスクを完全に排除しています。
+コンパイラフラグ欠落によって `-msse3 -O2` へと暗黙に降格していた過去の偽装ビルドを完全に排除。`-O3 -mtune=skylake -msse3 -mavx -mavx2 -mfma -mf16c -mno-gather -mno-scatter`、Clang 19、LLVM lld、およびマルチスレッド ThinLTO を適用。逆アセンブル（`objdump -d` 50万行サンプリング）により、**693 箇所の `%ymm` レジスタ**、**7 箇所の FMA3 命令**、および **厳格に 0 箇所の `%zmm`（AVX-512）命令** を確認済みであり、Haswell / Zen 2+ 環境での最高峰のスループットと `SIGILL` クラッシュゼロを両立しています。
 
 さらに、**RIME / Fcitx5 7層免疫ゲート**（物理テストで文字漏れゼロを検証済み）および **Adaptive Ozone プラットフォーム ゲート**（Wayland / X11 自動判定）を内蔵しています。
 
@@ -29,13 +58,13 @@
 
 ## 主な機能と特徴
 
-1. **純血 AVX2 / FMA3 ベクトル最適化（過去の疑似パッケージを完全払拭）**:
-   * 専用プロファイル `thorium_x86_profile="avx2_fma"` を使用。
-   * Clang 19、C++23、ThinLTO による全域最適化。
-   * V8 JavaScript JIT、WebAssembly、および Skia レンダリングパイプラインが 256 ビットレジスタ上で超高速動作。
+1. **純粋な AVX2 & FMA3 ベクトル最適化（過去の SSE3 偽装ビルドを完全一掃）**:
+   * Clang 19、C++23、ThinLTO、および専用プロファイル `thorium_x86_profile="avx2_fma"` を採用。
+   * フラグ: `-O3 -mtune=skylake -msse3 -mavx -mavx2 -mfma -mf16c -mno-gather -mno-scatter`。
+   * 逆アセンブルにより密度の高い `%ymm` ベクトル化を確認、AVX-512 へのオーバーフローを完全防止。
 
 2. **RIME / Fcitx5 統合と免疫ゲート**:
-   * `THORIUM_RIME_IMMUNE_GATE` を内蔵し、文字入力中の未変換英字漏れを完全に遮断。
+   * `THORIUM_RIME_IMMUNE_GATE` を内蔵し、文字入力中の未変換英字漏れ（キー抜けやショートカット誤爆）を完全に遮断。
    * 実機隔離テスト（`isolated-app-testing`）において 100% 安定動作を確認済み。
 
 3. **Adaptive Ozone プラットフォームゲート**:
@@ -55,19 +84,19 @@
 
 | ファイル名 | タイプ | サイズ | SHA256 チェックサム |
 | :--- | :--- | :--- | :--- |
-| `thorium-browser-stable_159.0.8137.0-1_amd64.deb` | Debian/Ubuntu 64-bit 公式 | 128 MB | `99294cb75b0976d8e7efbfb63a90c940e22fb4ff096ec9331b1105ee4d3ddf27` |
+| `thorium-browser-stable_159.0.8137.0-1_amd64.deb` | Debian/Ubuntu 64-bit | 128 MB | `99294cb75b0976d8e7efbfb63a90c940e22fb4ff096ec9331b1105ee4d3ddf27` |
 | `thorium-browser_159.0.8137.0_AVX2_RIME.deb` | Debian/Ubuntu エイリアス | 128 MB | `99294cb75b0976d8e7efbfb63a90c940e22fb4ff096ec9331b1105ee4d3ddf27` |
 | `thorium-browser-159.0.8137.0-avx2-linux-x64.tar.xz` | Linux ポータブル パッケージ | 154 MB | `ca372060e88863dce9187dd843fc8388842bb495d62de5beeaa6678bceded31b` |
 | `SHA256SUMS.txt` | チェックサム総表 | 340 B | `0ad5ea9834226cfd15fc24cda481fa1e7924ef2ae60b64ca7a898858e65eef8c` |
 
 ---
 
-## インストールと起動
+## クイック スタート
 
 ### Debian / Ubuntu / Linux Mint
 ```bash
 sudo dpkg -i thorium-browser-stable_159.0.8137.0-1_amd64.deb
-sudo apt-get install -f # 依存関係の修復
+sudo apt-get install -f # 依存パッケージの自動修復
 thorium-browser
 ```
 
@@ -80,14 +109,14 @@ cd thorium-browser-159.0.8137.0-avx2-linux-x64
 
 ---
 
-## ハードウェア互換性
+## ハードウェア互換性ガイド
 
-* **対応 CPU (Intel)**: 第4世代 Core（Haswell）〜第14世代 Core、Xeon E5 v3/v4、Xeon Scalable、Intel Core Ultra。
-* **対応 CPU (AMD)**: Ryzen 1000〜9000 シリーズ（Zen 1〜Zen 5）、EPYC、Threadripper。
-* **AVX-512 CPU**: お使いの CPU が AVX-512 をサポートしている場合は、[Thorium AVX-512 版](https://github.com/obhasashare2024-namo/thorium-avx512-rime) を推奨します。
+* **完全サポート（Intel）**：第4世代 Core（Haswell）から第14世代 Core、Xeon E5 v3/v4、Xeon Scalable、Intel Core Ultra。
+* **完全サポート（AMD）**：Ryzen 1000 から 9000 シリーズ（Zen 1 〜 Zen 5）、EPYC、Threadripper。
+* **AVX-512 プロセッサ環境**：Intel 第11世代 Core+ または AMD Zen 4/5 の場合は、[Thorium AVX-512 版](https://github.com/obhasashare2024-namo/thorium-avx512-rime) をご利用ください。
 
 ---
 
 ## ライセンス
 
-Thorium の変更点およびビルド スクリプトは BSD-3-Clause ライセンスで公開されています。Chromium は元の Chromium オープンソース ライセンスに準拠します。
+Thorium の改変コードおよびビルドスクリプトは BSD-3-Clause ライセンスの下で公開されています。Chromium の元のソースコードは Chromium オープンソース ライセンスに準拠します。
